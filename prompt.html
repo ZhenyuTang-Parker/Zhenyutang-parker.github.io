@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for the Career Development Centre: The Complete Playbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab-btn.active {
+            border-bottom-color: #3b82f6; /* blue-500 */
+            color: #3b82f6;
+        }
+        /* Style for code blocks */
+        pre {
+            background-color: #f3f4f6; /* gray-100 */
+            border: 1px solid #e5e7eb; /* gray-200 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 0.875rem;
+            color: #1f2937; /* gray-800 */
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900">AI Playbook: Career Development Centre</h1>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Introduction -->
+        <section id="intro" class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-blue-600 mb-4">Welcome to a New Era of AI-Assisted Work</h2>
+            <p class="text-lg md:text-xl max-w-4xl mx-auto text-slate-600">This playbook transforms your interaction with LLMs like Gemini into a strategic partnership, unlocking the full potential of AI in student coaching, content creation, and administrative excellence.</p>
+        </section>
+
+        <!-- Core Principles -->
+        <section id="principles" class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-10">The Three Core Principles</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Principle 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-blue-500">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-8 h-8 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <h4 class="text-xl font-semibold">1. AI as Co-pilot, Not Autopilot</h4>
+                    </div>
+                    <p class="text-slate-600">AI generates drafts and ideas, but your professional judgment is the final, irreplaceable authority. You are responsible for review and refinement.</p>
+                </div>
+                <!-- Principle 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-yellow-500">
+                    <div class="flex items-center mb-3">
+                         <svg class="w-8 h-8 text-yellow-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                        <h4 class="text-xl font-semibold">2. "Garbage In, Garbage Out"</h4>
+                    </div>
+                    <p class="text-slate-600">The quality of AI output depends entirely on your input. Invest time in crafting clear, detailed instructions for the best results.</p>
+                </div>
+                <!-- Principle 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-red-500">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-8 h-8 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        <h4 class="text-xl font-semibold">3. Data Security: The Red Line</h4>
+                    </div>
+                    <p class="text-slate-600">Never input Personally Identifiable Information (PII) of students. Protecting privacy is the highest priority and a non-negotiable rule.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- C.R.A.F.T. Framework -->
+        <section id="craft" class="mb-16 bg-white p-8 rounded-lg shadow-lg">
+            <h3 class="text-3xl font-bold text-center mb-6">The C.R.A.F.T. Prompting Framework</h3>
+            <p class="text-center text-slate-600 max-w-3xl mx-auto mb-8">A professional prompt is a mission briefing. Use this model to structure your instructions for superior results.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="text-center p-4 bg-blue-100 rounded-full w-32 h-32 flex flex-col justify-center shadow">
+                    <span class="font-bold text-2xl text-blue-800">C</span>
+                    <span class="font-semibold">Context</span>
+                </div>
+                <div class="text-center p-4 bg-green-100 rounded-full w-32 h-32 flex flex-col justify-center shadow">
+                    <span class="font-bold text-2xl text-green-800">R</span>
+                    <span class="font-semibold">Role</span>
+                </div>
+                <div class="text-center p-4 bg-indigo-100 rounded-full w-32 h-32 flex flex-col justify-center shadow">
+                    <span class="font-bold text-2xl text-indigo-800">A</span>
+                    <span class="font-semibold">Action</span>
+                </div>
+                <div class="text-center p-4 bg-purple-100 rounded-full w-32 h-32 flex flex-col justify-center shadow">
+                    <span class="font-bold text-2xl text-purple-800">F</span>
+                    <span class="font-semibold">Format</span>
+                </div>
+                <div class="text-center p-4 bg-pink-100 rounded-full w-32 h-32 flex flex-col justify-center shadow">
+                    <span class="font-bold text-2xl text-pink-800">T</span>
+                    <span class="font-semibold">Tone</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Strategic Applications -->
+        <section id="applications" class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-10">Core Strategic Applications & Prompts</h3>
+            <div class="mb-4 border-b border-gray-200">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" role="tablist">
+                    <li class="mr-2" role="presentation"><button class="tab-btn inline-block p-4 border-b-2 rounded-t-lg active" id="research-tab" type="button" role="tab" aria-controls="research" aria-selected="true">Exploring Unknown Topics</button></li>
+                    <li class="mr-2" role="presentation"><button class="tab-btn inline-block p-4 border-b-2 rounded-t-lg" id="workshop-tab" type="button" role="tab" aria-controls="workshop" aria-selected="false">Workshop Design</button></li>
+                    <li class="mr-2" role="presentation"><button class="tab-btn inline-block p-4 border-b-2 rounded-t-lg" id="admin-tab" type="button" role="tab" aria-controls="admin" aria-selected="false">Internal Admin</button></li>
+                    <li class="mr-2" role="presentation"><button class="tab-btn inline-block p-4 border-b-2 rounded-t-lg" id="tech-help-tab" type="button" role="tab" aria-controls="tech-help" aria-selected="false">Tech & Software Help</button></li>
+                </ul>
+            </div>
+            <div id="tabContent">
+                <div class="tab-content p-4 bg-white rounded-lg shadow active" id="research" role="tabpanel" aria-labelledby="research-tab">
+                    <h4 class="text-2xl font-semibold mb-4">Exploring Unknown Topics (with Anti-Hallucination Measures)</h4>
+                    <div class="mb-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg">
+                        <p class="font-semibold">The Situation:</p>
+                        <p class="text-slate-700">A student from a niche field (e.g., 'Bio-Integrated Design') asks about career paths in a sector you've never heard of. You need to get up to speed quickly and reliably, without getting false information from the AI.</p>
+                    </div>
+                    <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-400 rounded-r-lg">
+                        <p class="font-semibold">The Strategy:</p>
+                        <p class="text-slate-700">Do not ask the AI for direct facts. Instead, instruct it to act as a research assistant and create a verifiable research plan for you. This forces the AI to outline a process rather than state potentially fabricated facts, giving you a safe and structured starting point.</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h5 class="font-bold text-lg mb-2">Gold-Standard Prompt (Complex Version)</h5>
+                            <pre><code><strong class="text-green-600">(R)</strong> You are a methodical research analyst with expertise in identifying reliable sources.
+<strong class="text-blue-600">(C)</strong> I need to quickly understand a niche industry I know nothing about: 'The UK market for cultivated meat'.
+<strong class="text-indigo-600">(A)</strong> Your task is to create a research plan for me. IMPORTANT: Do NOT provide direct facts or statistics about the industry from your own knowledge.
+<strong class="text-purple-600">(F)</strong> Instead, your output must provide the following three things:
+1. Key Research Questions: List the 5-7 most important questions I would need to answer to get a comprehensive overview of this topic.
+2. Effective Search Queries: For each question, suggest 2-3 specific, effective search queries I could use in Google, Google Scholar, or LinkedIn to find answers.
+3. Reliable Source Checklist: List the types of sources I should prioritise (e.g., reports from the Food Standards Agency, articles in specific scientific journals, publications from industry associations like the Good Food Institute) and the types of sources I should treat with caution (e.g., anonymous blog posts, un-cited opinion pieces).</code></pre>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-lg mb-2">Simple Version</h5>
+                            <pre><code>I need to research a new topic: '[Your Topic Here]'.
+
+Please act as a research assistant. Don't give me facts directly.
+Instead, create a simple research plan for me. I need:
+1. Three key questions to ask.
+2. Three good Google search terms to find the answers.
+3. Three types of reliable sources to look for.</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content p-4 bg-white rounded-lg shadow" id="workshop" role="tabpanel" aria-labelledby="workshop-tab">
+                    <h4 class="text-2xl font-semibold mb-4">Workshop & Presentation Design</h4>
+                    <div class="mb-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg">
+                        <p class="font-semibold">The Situation:</p>
+                        <p class="text-slate-700">You need to create a workshop on a specific topic. You might be starting from a blank page or already have a structure in mind.</p>
+                    </div>
+                    <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-400 rounded-r-lg">
+                        <p class="font-semibold">The Strategy:</p>
+                        <p class="text-slate-700">Use AI as an instructional designer. Ask it to propose a logical flow and key learning objectives (The Architect). Or, if you have a structure, provide it to the AI and instruct it to generate the specific content for each section (The Builder).</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h5 class="font-bold text-lg mb-2">Prompt Type A: The Architect</h5>
+                            <pre><code><strong class="text-green-600">(R)</strong> You are an expert career educator...
+<strong class="text-blue-600">(C)</strong> design a 60-minute workshop on 'Effective Networking for Beginners in the UK'...
+<strong class="text-indigo-600">(A)</strong> propose a complete workshop structure and a detailed outline...
+<strong class="text-purple-600">(F)</strong> For each module: Module Title, Learning Objective, 3-4 bullet points...
+<strong class="text-pink-600">(T)</strong> strategic, educational, and highly encouraging.</code></pre>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-lg mb-2">Prompt Type B: The Builder</h5>
+                             <pre><code><strong class="text-green-600">(R)</strong> You are an expert digital branding strategist...
+<strong class="text-blue-600">(C)</strong> preparing a 45-minute workshop for final-year Arts & Humanities students...
+<strong class="text-indigo-600">(A)</strong> Generate the content for a slide deck based on the specific structure below...
+<strong class="text-purple-600">(F)</strong> Slide 1: Title, Slide 2: Agenda, etc...
+<strong class="text-pink-600">(T)</strong> practical, engaging, and highly actionable.</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content p-4 bg-white rounded-lg shadow" id="admin" role="tabpanel" aria-labelledby="admin-tab">
+                     <h4 class="text-2xl font-semibold mb-4">Streamlining Internal Admin (Meeting Notes)</h4>
+                     <div class="mb-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg">
+                        <p class="font-semibold">The Situation:</p>
+                        <p class="text-slate-700">You have raw, messy notes from a meeting and need to turn them into a clear, actionable summary for your team.</p>
+                    </div>
+                    <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-400 rounded-r-lg">
+                        <p class="font-semibold">The Strategy:</p>
+                        <p class="text-slate-700">Instruct the AI to act as a highly efficient executive assistant. Provide the raw text and specify the exact format for the output, such as an email with sections for decisions and action items.</p>
+                    </div>
+                    <pre><code><strong class="text-green-600">(R)</strong> You are a highly efficient executive assistant.
+<strong class="text-indigo-600">(A)</strong> Please convert my raw meeting notes below into a professional summary email.
+<strong class="text-blue-600">(C)</strong> Raw Notes: "- careers fair next month, john says venue tbc..."
+<strong class="text-purple-600">(F)</strong> The email should have a clear subject line and be structured with three sections: 'Key Decisions', 'Action Items (with owner)', and 'For Follow-Up'.</code></pre>
+                </div>
+                <div class="tab-content p-4 bg-white rounded-lg shadow" id="tech-help" role="tabpanel" aria-labelledby="tech-help-tab">
+                    <h4 class="text-2xl font-semibold mb-4">Tech & Software Help</h4>
+                    <div class="mb-6 p-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-lg">
+                        <p class="font-semibold">The Situation:</p>
+                        <p class="text-slate-700">You're struggling with a function in a software tool like Excel or Word. You either know what you want to achieve but not how, or you're unsure what a specific feature does.</p>
+                    </div>
+                    <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-400 rounded-r-lg">
+                        <p class="font-semibold">The Strategy:</p>
+                        <p class="text-slate-700">Use the AI as an infinitely patient tech support expert. Be explicit about your starting point and your desired outcome. Provide the context (what software, what data) and ask for the exact formula or a step-by-step guide.</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h5 class="font-bold text-lg mb-2">"I Know the Goal, Not the Method"</h5>
+                            <pre><code><strong class="text-blue-600">(C)</strong> I am using Microsoft Excel. I have a list... Column A... Column B...
+<strong class="text-indigo-600">(A)</strong> I want to create a new column... that combines their names...
+<strong class="text-purple-600">(F)</strong> Please provide the exact formula... and a brief explanation.</code></pre>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-lg mb-2">"I Know the Function, Not the Application"</h5>
+                             <pre><code><strong class="text-blue-600">(C)</strong> I am using Microsoft Word. I'm preparing a long report...
+<strong class="text-indigo-600">(A)</strong> I need to create an automated Table of Contents...
+<strong class="text-purple-600">(F)</strong> Please provide a simple, step-by-step guide...</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Technique -->
+        <section id="advanced" class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-10">Advanced Technique: Teaching the AI to Self-Correct</h3>
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <p class="text-center text-slate-600 max-w-3xl mx-auto mb-4">AI models are often "confidently wrong" about specific code or syntax for niche tools like Mermaid.js. This case study shows you how to diagnose the error and teach the AI the correct rules in real-time.</p>
+                <div class="text-center mb-8">
+                    <p class="text-slate-600">Mermaid is a free, open-source platform for creating diagrams and charts from text. You can learn more here:</p>
+                    <a href="https://mermaid.js.org/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Mermaid.js Official Website</a> |
+                    <a href="https://www.mermaidchart.com/app/dashboard" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Mermaid Chart Dashboard</a> |
+                    <a href="https://mermaid.js.org/intro/getting-started.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Getting Started (Many Examples)</a>
+                </div>
+
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="font-semibold text-lg p-2 bg-slate-100 rounded-t-lg border-b">Step 1: The Initial (Flawed) Attempt</h4>
+                        <div class="p-4 bg-white rounded-b-lg border border-t-0">
+                            <p class="text-slate-600 mb-3">First, we ask the AI to generate a mind map, but it produces incorrect code.</p>
+                            <p class="font-mono text-sm mb-2"><strong>Prompt:</strong> (R) You are a strategic planner. (C) I am planning our annual 'STEM Careers Fair'. (A) I need you to brainstorm all the major components of this project. (F) Please generate the output as a Mermaid.js mind map code block.</p>
+                            <p class="mb-2"><strong>Typical (Flawed) AI Response:</strong></p>
+                            <pre><code>mindmap
+  STEM Careers Fair Plan
+      Phase 1: Planning
+          Budgeting
+          Employer Outreach
+      Phase 2: Marketing
+          Social Media
+          Student Prep Workshops
+      Phase 3: Execution
+          On-the-day Staffing</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-lg p-2 bg-slate-100 rounded-t-lg border-b">Step 2 & 3: Identify Error & Provide a "Golden Example"</h4>
+                        <div class="p-4 bg-white rounded-b-lg border border-t-0">
+                            <p class="text-slate-600 mb-3">After seeing the code fails, you provide a working example as "ground truth." Find many official examples <a href="https://mermaid.js.org/intro/getting-started.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">here</a>.</p>
+                            <p class="font-mono text-sm mb-2"><strong>Corrective Prompt:</strong> Here is a working example of a valid Mermaid mind map. Please acknowledge that you have seen it.</p>
+                            <pre><code>mindmap
+  root((mindmap))
+    Origins
+      Long history
+      ::icon(fa fa-book)
+      Popularisation
+        British popular psychology author Tony Buzan
+    Research
+      On effectiveness&lt;br/&gt;and features
+      On Automatic creation
+        Uses
+            Creative techniques
+            Strategic planning
+            Argument mapping
+    Tools
+      Pen and paper
+      Mermaid</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-lg p-2 bg-green-100 text-green-800 rounded-t-lg border-b border-green-200">Step 4: The Crucial "Rule Extraction" Prompt</h4>
+                        <div class="p-4 bg-white rounded-b-lg border border-t-0 border-green-200">
+                            <p class="text-slate-600 mb-3">This is the most important step. Ask the AI to become a syntax analyst, forcing it to learn from the correct example.</p>
+                            <p class="font-mono text-sm mb-2"><strong>Gold-Standard Prompt:</strong> (A) Analyze the working Mermaid mind map example I just provided. Do NOT generate a new map. (F) Instead, list the specific syntax rules and principles required to create a valid map. Pay close attention to the root node, how children and grandchildren are created, and the use of indentation.</p>
+                             <p class="mb-2"><strong>Expected AI Response (Analyzing the Rules):</strong></p>
+                             <div class="p-3 bg-slate-50 rounded text-sm">
+                                Based on the example provided, here are the rules for creating a valid Mermaid mind map:
+                                <ul class="list-disc list-inside mt-2 space-y-1">
+                                    <li>The code block must begin with the <code>mindmap</code> keyword.</li>
+                                    <li>The first line after the keyword defines the root node. It can be styled, for example, with <code>((text))</code>.</li>
+                                    <li>Child nodes are created on new lines with one level of indentation (e.g., two or four spaces).</li>
+                                    <li>Grandchild nodes are created with a second level of indentation.</li>
+                                    <li>No special characters like hyphens (-) or asterisks (*) are used. The hierarchy is defined purely by indentation.</li>
+                                </ul>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-lg p-2 bg-blue-100 text-blue-800 rounded-t-lg border-b border-blue-200">Step 5: The Final, Corrected Attempt</h4>
+                        <div class="p-4 bg-white rounded-b-lg border border-t-0 border-blue-200">
+                            <p class="text-slate-600 mb-3">Now combine your original request with the newly established rules.</p>
+                            <p class="font-mono text-sm mb-2"><strong>Gold-Standard Prompt:</strong> Excellent. Now, please regenerate the 'STEM Careers Fair Plan' mind map. (A) You MUST strictly follow the syntax rules you just extracted in your previous response. (F) Ensure the output is a valid Mermaid.js code block, using only indentation to create the hierarchy.</p>
+                            <p class="mb-2"><strong>Correct AI Response:</strong></p>
+                            <pre><code>mindmap
+  ((STEM Careers Fair Plan))
+    Phase 1: Planning & Strategy
+      Budgeting
+        Venue Costs
+        Marketing Spend
+      Employer Outreach
+        Target List
+        Invitation Tiers
+    Phase 2: Marketing & Student Engagement
+      Marketing Channels
+        Social Media
+        Departmental Emails
+      Student Prep Workshops
+    Phase 3: Event Logistics & Execution
+      On-the-day Staffing
+      Employer Welcome Packs
+    Phase 4: Post-Event & Feedback
+      Surveys
+      Thank You Notes</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t">
+                    <h4 class="font-bold text-xl text-center mb-3">Why This Works (The Key Takeaway)</h4>
+                    <p class="text-slate-600 max-w-3xl mx-auto text-center">This multi-step process is a powerful way to handle AI errors. By providing a correct example and forcing the AI to <strong>first analyze the rules</strong> before executing the task, you constrain its output and override its faulty training data. This is far more effective than simply saying "That's wrong, try again."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Privacy -->
+        <section id="privacy" class="mb-16 bg-red-100 border-l-8 border-red-500 p-8 rounded-lg shadow-lg">
+             <h3 class="text-3xl font-bold text-red-800 mb-4">⚠️ Data Privacy & Compliance: The Hard Rules</h3>
+             <p class="text-red-700 mb-6">This section is mandatory reading. Every team member must understand and adhere to these rules.</p>
+             <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-bold text-lg text-red-900 mb-2">Absolutely Prohibited Input</h4>
+                    <ul class="list-disc list-inside text-red-700 space-y-1">
+                        <li>Full names, student IDs, emails, phone numbers</li>
+                        <li>Passport details, visa information, NI numbers</li>
+                        <li>Any data that could identify an individual</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg text-red-900 mb-2">Critical Action: Disable Model Training</h4>
+                     <p class="text-red-700">In your AI tool's settings, navigate to <strong>Data Controls</strong> or <strong>Privacy Settings</strong> and ensure that <strong>"Chat history & training" is turned OFF</strong>. This is the most important step to protect privacy.</p>
+                </div>
+             </div>
+        </section>
+
+        
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white mt-16 py-6">
+       
+    </footer>
+
+    <script>
+        // JavaScript for tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                });
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+
+                button.classList.add('active');
+                button.setAttribute('aria-selected', 'true');
+                const targetContentId = button.getAttribute('aria-controls');
+                const targetContent = document.getElementById(targetContentId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

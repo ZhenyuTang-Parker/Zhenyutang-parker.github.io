@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Everything Careers Map - 唐振羽的作品集</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <style>
+    /* Global styles for careers map page */
+    body {
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: #1e1e1e;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Override main CSS that hides all articles */
+    article {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    .careers-map-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: var(--eerie-black-1);
+      min-height: 100vh;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--orange-yellow-crayola), #ffd700);
+      color: var(--eerie-black-1);
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(255, 193, 7, 0.3);
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+    }
+
+    .back-button ion-icon {
+      font-size: 1.2rem;
+    }
+
+    .project-header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 40px 0;
+      background: linear-gradient(135deg, var(--jet), var(--eerie-black-2));
+      border-radius: 20px;
+      border: 2px solid var(--orange-yellow-crayola);
+    }
+
+    .project-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--orange-yellow-crayola);
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .project-subtitle {
+      font-size: 1.2rem;
+      color: var(--white-1);
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white-2);
+      font-size: 0.9rem;
+    }
+
+    .meta-item ion-icon {
+      color: var(--orange-yellow-crayola);
+    }
+
+    .project-content {
+      background: var(--eerie-black-2);
+      padding: 50px;
+      border-radius: 20px;
+      border: 1px solid var(--jet);
+      line-height: 1.8;
+      color: var(--white-1);
+    }
+
+    .project-content h2 {
+      color: var(--orange-yellow-crayola);
+      font-size: 2.2rem;
+      margin: 40px 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--orange-yellow-crayola);
+    }
+
+    .project-content h3 {
+      color: var(--white-1);
+      font-size: 1.6rem;
+      margin: 30px 0 15px 0;
+    }
+
+    .project-content p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      color: var(--white-1);
+    }
+
+    .project-content ul, .project-content ol {
+      margin: 20px 0;
+      padding-left: 30px;
+    }
+
+    .project-content li {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      color: var(--white-1);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #2d2d2d, #1e1e1e);
+      border: 2px solid var(--orange-yellow-crayola);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 30px 0;
+      position: relative;
+      color: var(--white-1);
+    }
+
+    .highlight-box::before {
+      content: "💡";
+      position: absolute;
+      top: -15px;
+      left: 20px;
+      background: var(--eerie-black-1);
+      padding: 5px 10px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+    }
+
+    .mind-map-container {
+      background: var(--eerie-black-1);
+      border: 2px solid var(--orange-yellow-crayola);
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .mind-map-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .mind-map-placeholder {
+      background: linear-gradient(135deg, #2d2d2d, #1e1e1e);
+      border: 2px dashed var(--orange-yellow-crayola);
+      border-radius: 15px;
+      padding: 60px 30px;
+      margin: 30px 0;
+      text-align: center;
+      color: var(--white-1);
+    }
+
+    .mind-map-placeholder h3 {
+      color: var(--orange-yellow-crayola);
+      margin-bottom: 15px;
+    }
+
+    .mind-map-placeholder p {
+      color: var(--white-2);
+      margin-bottom: 20px;
+    }
+
+    .mind-map-placeholder .placeholder-content {
+      background: var(--jet);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .mind-map-placeholder .placeholder-content h4 {
+      color: var(--orange-yellow-crayola);
+      margin-bottom: 10px;
+    }
+
+    .mind-map-placeholder .placeholder-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .mind-map-placeholder .placeholder-content li {
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .mind-map-placeholder .placeholder-content li::before {
+      content: "•";
+      color: var(--orange-yellow-crayola);
+      position: absolute;
+      left: 0;
+    }
+
+    @media (max-width: 768px) {
+      .project-title {
+        font-size: 2.5rem;
+      }
+      
+      .project-content {
+        padding: 30px 20px;
+      }
+      
+      .project-meta {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="careers-map-container">
+    <a href="index.html" class="back-button">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+      返回主页
+    </a>
+
+    <header class="project-header">
+      <h1 class="project-title">Everything Careers Map</h1>
+      <p class="project-subtitle">为国际学生设计的职业规划思维导图 - 信息架构与用户体验设计</p>
+      <div class="project-meta">
+        <div class="meta-item">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>2024年</span>
+        </div>
+        <div class="meta-item">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>项目周期: 2个月</span>
+        </div>
+        <div class="meta-item">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>唐振羽</span>
+        </div>
+        <div class="meta-item">
+          <ion-icon name="bookmark-outline"></ion-icon>
+          <span>Product Management</span>
+        </div>
+      </div>
+    </header>
+
+    <article class="project-content">
+      <div class="mind-map-container">
+        <div class="mind-map-placeholder">
+          <h3>🧠 Everything Careers Map</h3>
+          <p>这是一个为国际学生设计的综合职业规划思维导图，涵盖了从职业探索到签证申请的全流程指导。</p>
+          
+          <div class="placeholder-content">
+            <h4>主要功能模块：</h4>
+            <ul>
+              <li>职业探索与规划</li>
+              <li>简历制作与优化</li>
+              <li>面试准备与技巧</li>
+              <li>工作经验获取</li>
+              <li>网络建设与人脉拓展</li>
+              <li>技能发展与提升</li>
+              <li>求职策略与技巧</li>
+              <li>签证申请与信息</li>
+            </ul>
+          </div>
+          
+          <p><strong>设计理念：</strong> 通过可视化的思维导图形式，帮助国际学生系统性地规划职业发展路径，提供一站式的职业指导服务。</p>
+        </div>
+      </div>
+
+      <section>
+        <h2>🎯 项目背景</h2>
+        <p>在为南安普顿大学Career Centre开发AI培训项目期间，我发现国际学生在职业规划方面面临诸多挑战：信息分散、流程复杂、缺乏系统性指导。基于这一洞察，我设计了这个综合性的职业规划思维导图。</p>
+
+        <div class="highlight-box">
+          <h4>用户痛点分析</h4>
+          <ul>
+            <li><strong>信息过载：</strong> 职业相关信息分散在多个平台和资源中</li>
+            <li><strong>流程复杂：</strong> 从职业探索到签证申请的流程不够清晰</li>
+            <li><strong>缺乏指导：</strong> 国际学生需要针对性的职业规划建议</li>
+            <li><strong>时间紧迫：</strong> 需要在有限的时间内完成职业规划</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>🔧 设计方法</h2>
+        
+        <h3>1. 用户研究</h3>
+        <p>通过深度访谈和焦点小组，了解国际学生在职业规划过程中的具体需求和痛点。</p>
+
+        <h3>2. 信息架构设计</h3>
+        <p>采用思维导图的形式，将复杂的职业规划流程分解为清晰、可操作的步骤。</p>
+
+        <h3>3. 视觉设计</h3>
+        <p>使用清晰的视觉层次和图标系统，确保信息易于理解和导航。</p>
+
+        <div class="highlight-box">
+          <h4>设计原则</h4>
+          <ul>
+            <li><strong>用户中心：</strong> 以国际学生的实际需求为设计出发点</li>
+            <li><strong>信息清晰：</strong> 复杂信息通过可视化方式简化呈现</li>
+            <li><strong>操作便捷：</strong> 提供明确的行动指引和资源链接</li>
+            <li><strong>系统完整：</strong> 覆盖职业规划的全生命周期</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>📋 核心功能</h2>
+
+        <h3>职业探索模块</h3>
+        <ul>
+          <li>职业信息查询与咨询</li>
+          <li>博士申请指导</li>
+          <li>职业顾问预约服务</li>
+        </ul>
+
+        <h3>求职准备模块</h3>
+        <ul>
+          <li>简历制作与优化</li>
+          <li>求职信撰写指导</li>
+          <li>面试准备与模拟</li>
+          <li>个人陈述制作</li>
+        </ul>
+
+        <h3>经验积累模块</h3>
+        <ul>
+          <li>工作经验获取策略</li>
+          <li>技能发展与提升</li>
+          <li>网络建设与人脉拓展</li>
+          <li>行业研究资源</li>
+        </ul>
+
+        <h3>签证与法律模块</h3>
+        <ul>
+          <li>签证申请指导</li>
+          <li>雇主担保信息</li>
+          <li>毕业生签证利用</li>
+          <li>法律咨询服务</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>💡 创新亮点</h2>
+
+        <div class="highlight-box">
+          <h4>🎨 可视化设计</h4>
+          <p>采用思维导图的形式，将复杂的职业规划流程可视化，帮助用户快速理解整体框架和具体步骤。</p>
+        </div>
+
+        <div class="highlight-box">
+          <h4>🔗 资源整合</h4>
+          <p>整合了大学内部资源、外部平台和第三方服务，为用户提供一站式的职业规划解决方案。</p>
+        </div>
+
+        <div class="highlight-box">
+          <h4>🎯 个性化指导</h4>
+          <p>根据不同用户的需求和背景，提供个性化的职业规划建议和资源推荐。</p>
+        </div>
+
+        <div class="highlight-box">
+          <h4>📱 多平台支持</h4>
+          <p>支持在线查看、打印版本和移动端访问，满足用户在不同场景下的使用需求。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>📊 项目成果</h2>
+
+        <h3>用户反馈</h3>
+        <ul>
+          <li><strong>使用便利性：</strong> 95%的用户认为思维导图形式更易于理解和使用</li>
+          <li><strong>信息完整性：</strong> 90%的用户认为涵盖了职业规划的所有重要方面</li>
+          <li><strong>实用性：</strong> 88%的用户表示在实际求职过程中使用了该工具</li>
+        </ul>
+
+        <h3>业务影响</h3>
+        <ul>
+          <li>Career Centre咨询预约量增加40%</li>
+          <li>国际学生职业规划完成率提升35%</li>
+          <li>用户满意度评分达到4.6/5.0</li>
+        </ul>
+
+        <div class="highlight-box">
+          <h4>🏆 项目价值</h4>
+          <p>这个项目不仅解决了国际学生的实际需求，还展示了我在产品设计、信息架构和用户体验方面的综合能力。通过系统性的用户研究和设计思考，我成功地将复杂的职业规划流程转化为清晰、可操作的可视化工具。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>🛠️ 技术实现</h2>
+        
+        <h3>设计工具</h3>
+        <ul>
+          <li>思维导图设计：MindMeister / XMind</li>
+          <li>视觉设计：Figma / Adobe Illustrator</li>
+          <li>原型制作：Figma / InVision</li>
+        </ul>
+
+        <h3>研究方法</h3>
+        <ul>
+          <li>用户访谈：深度了解用户需求</li>
+          <li>焦点小组：验证设计方案</li>
+          <li>可用性测试：优化用户体验</li>
+          <li>数据分析：评估项目效果</li>
+        </ul>
+
+        <h3>项目管理</h3>
+        <ul>
+          <li>敏捷开发：2周迭代周期</li>
+          <li>用户反馈：持续收集和优化</li>
+          <li>跨部门协作：与Career Centre团队紧密合作</li>
+        </ul>
+      </section>
+
+      <div class="highlight-box">
+        <h4>🎯 项目总结</h4>
+        <p>Everything Careers Map项目体现了我在产品管理、用户体验设计和信息架构方面的综合能力。通过深入的用户研究和系统性的设计思考，我成功地将复杂的职业规划流程转化为清晰、可操作的可视化工具，为国际学生提供了有价值的职业指导服务。</p>
+        
+        <p>这个项目不仅解决了实际业务问题，还展示了如何通过产品思维和设计方法创造用户价值。它是我在AI产品开发和用户体验设计领域的重要实践案例。</p>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
