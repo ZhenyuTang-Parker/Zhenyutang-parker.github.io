@@ -124,6 +124,9 @@ document.addEventListener("DOMContentLoaded", function() {
           pages[j].classList.add("active");
           clickedLink.classList.add("active");
           
+          // Save current page to localStorage
+          saveCurrentPage(clickedText);
+          
           // Debug: check if the page is now visible
           console.log("Page classes after activation:", pages[j].className);
           console.log("Page display style:", window.getComputedStyle(pages[j]).display);
@@ -137,27 +140,64 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log(`Bound click event to navigation link ${index + 1}:`, link.innerHTML);
   });
   
-  // Find the About navigation link and make it active
-  const aboutLink = Array.from(navigationLinks).find(link => 
-    link.innerHTML.toLowerCase() === "about"
-  );
-  
-  if (aboutLink) {
-    aboutLink.classList.add("active");
-    console.log("About link activated");
-  } else {
-    console.error("About navigation link not found!");
+  // Function to save current page to localStorage
+  function saveCurrentPage(pageName) {
+    localStorage.setItem('currentPage', pageName);
   }
   
-  // Ensure About page is active
-  const aboutPage = document.querySelector('[data-page="about"]');
-  if (aboutPage) {
-    aboutPage.classList.add("active");
-    console.log("About page activated");
-    console.log("About page classes:", aboutPage.className);
-    console.log("About page display style:", window.getComputedStyle(aboutPage).display);
-  } else {
-    console.error("About page not found!");
+  // Function to restore page from localStorage
+  function restoreCurrentPage() {
+    const savedPage = localStorage.getItem('currentPage');
+    if (savedPage) {
+      // Remove active from all pages and links
+      pages.forEach(page => page.classList.remove("active"));
+      navigationLinks.forEach(link => link.classList.remove("active"));
+      
+      // Activate the saved page
+      const targetPage = document.querySelector(`[data-page="${savedPage}"]`);
+      const targetLink = Array.from(navigationLinks).find(link => 
+        link.innerHTML.toLowerCase() === savedPage
+      );
+      
+      if (targetPage) {
+        targetPage.classList.add("active");
+        console.log("Restored page:", savedPage);
+      }
+      
+      if (targetLink) {
+        targetLink.classList.add("active");
+        console.log("Restored navigation link:", savedPage);
+      }
+      
+      return true;
+    }
+    return false;
+  }
+  
+  // Try to restore saved page, otherwise default to About
+  if (!restoreCurrentPage()) {
+    // Find the About navigation link and make it active
+    const aboutLink = Array.from(navigationLinks).find(link => 
+      link.innerHTML.toLowerCase() === "about"
+    );
+    
+    if (aboutLink) {
+      aboutLink.classList.add("active");
+      console.log("About link activated");
+    } else {
+      console.error("About navigation link not found!");
+    }
+    
+    // Ensure About page is active
+    const aboutPage = document.querySelector('[data-page="about"]');
+    if (aboutPage) {
+      aboutPage.classList.add("active");
+      console.log("About page activated");
+      console.log("About page classes:", aboutPage.className);
+      console.log("About page display style:", window.getComputedStyle(aboutPage).display);
+    } else {
+      console.error("About page not found!");
+    }
   }
   
   // Add a test function to manually test navigation
@@ -263,8 +303,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Check if this is the first visit
   const hasVisitedBefore = localStorage.getItem("hrNotificationShown");
   
-  // HR Notification temporarily disabled
-  /*
+  // HR Notification functionality
   if (!hasVisitedBefore) {
     // Show notification after a short delay for better UX
     setTimeout(() => {
@@ -278,7 +317,6 @@ document.addEventListener("DOMContentLoaded", function() {
   setTimeout(() => {
     showHRNotification();
   }, 1000);
-  */
   
   // Event listeners for closing the modal
   if (hrNotificationCloseBtn) {
@@ -318,12 +356,38 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 500);
   };
   
-  console.log("HR notification modal functionality initialized (currently disabled)");
+  console.log("HR notification modal functionality initialized");
   console.log("Available functions: showHRNotification(), hideHRNotification(), resetHRNotification()");
 
   // Skills Filter Functionality
   const skillsNavLinks = document.querySelectorAll("[data-skill-filter]");
   const skillCategories = document.querySelectorAll("[data-skill-category]");
+  const skillsSection = document.querySelector(".skills-section");
+  const skillsGrid = document.querySelector(".skills-grid");
+
+  console.log("Skills section found:", !!skillsSection);
+  console.log("Skills grid found:", !!skillsGrid);
+  console.log("Skills nav links found:", skillsNavLinks.length);
+  console.log("Skill categories found:", skillCategories.length);
+  
+  if (skillsSection) {
+    console.log("Skills section display style:", window.getComputedStyle(skillsSection).display);
+    console.log("Skills section visibility:", window.getComputedStyle(skillsSection).visibility);
+    console.log("Skills section opacity:", window.getComputedStyle(skillsSection).opacity);
+  }
+  
+  if (skillsGrid) {
+    console.log("Skills grid display style:", window.getComputedStyle(skillsGrid).display);
+    console.log("Skills grid children count:", skillsGrid.children.length);
+  }
+  
+  // Check if skills section is inside an active article
+  const aboutArticle = document.querySelector('article[data-page="about"]');
+  if (aboutArticle) {
+    console.log("About article classes:", aboutArticle.className);
+    console.log("About article display style:", window.getComputedStyle(aboutArticle).display);
+    console.log("Skills section is inside about article:", aboutArticle.contains(skillsSection));
+  }
 
   if (skillsNavLinks.length > 0 && skillCategories.length > 0) {
     console.log("Initializing skills filter functionality...");
@@ -423,7 +487,7 @@ document.addEventListener("DOMContentLoaded", function() {
       content: `
         <div class="project-meta">
           <p><strong>项目类型:</strong> 产品设计与信息架构</p>
-          <p><strong>项目周期:</strong> 2024年，2个月</p>
+          <p><strong>项目周期:</strong> 2025年7月10号-15号</p>
           <p><strong>目标用户:</strong> 国际学生</p>
           <p><strong>项目背景:</strong> 南安普顿大学Career Centre职业规划工具</p>
         </div>
@@ -487,7 +551,7 @@ document.addEventListener("DOMContentLoaded", function() {
       content: `
         <div class="project-meta">
           <p><strong>项目类型:</strong> 提示词工程实践</p>
-          <p><strong>项目周期:</strong> 持续优化</p>
+          <p><strong>项目周期:</strong> 2025年7月1号-10号</p>
           <p><strong>目标用户:</strong> Career Centre员工</p>
           <p><strong>我的角色:</strong> 提示词工程师 & 培训师</p>
         </div>
@@ -530,76 +594,251 @@ document.addEventListener("DOMContentLoaded", function() {
 
       `
     },
-    "troubleshooting-prd": {
-      title: "问题自查系统PRD",
-      category: "Product Management",
+    "troubleshooting-frontend": {
+      title: "问题自查系统 - 前端",
+      category: "Full Stack",
+      externalLink: "https://zy-strouble-shooting.web.app/",
       screenshots: [
-        "./assets/images/project-4.png",
-        "./assets/images/project-5.png",
-        "./assets/images/project-6.png"
+        "./assets/images/trouble%20shooting/f1.png",
+        "./assets/images/trouble%20shooting/f2.png",
+        "./assets/images/trouble%20shooting/f3.png"
       ],
       content: `
         <div class="project-meta">
-          <p><strong>项目类型:</strong> 产品需求文档 (PRD)</p>
-          <p><strong>项目周期:</strong> 8周</p>
-          <p><strong>团队规模:</strong> 5人</p>
-          <p><strong>我的角色:</strong> 产品经理</p>
+          <p><strong>项目类型:</strong> 前端开发</p>
+          <p><strong>项目周期:</strong> 2025年7月20号-25号</p>
+          <p><strong>目标用户:</strong> 学生和职业发展指导者</p>
+          <p><strong>项目背景:</strong> 交互式职业发展问题自查系统前端界面开发</p>
+          <p><strong>部署地址:</strong> <a href="https://zy-trouble-shooting.web.app/" target="_blank">https://zy-trouble-shooting.web.app/</a></p>
         </div>
-        
-        <h3>产品概述</h3>
-        <p>智能问题自查系统是一个面向企业IT支持团队的自助式问题诊断与解决方案推荐平台。该系统旨在减少重复性支持工单，提升问题解决效率，改善用户体验。</p>
-        
-        <h3>用户需求分析</h3>
-        <p><strong>痛点识别:</strong></p>
-        <ul>
-          <li>重复性问题占用大量支持资源（约40%的工单）</li>
-          <li>用户等待时间长，平均响应时间超过2小时</li>
-          <li>支持团队工作负荷不均衡，高峰期响应质量下降</li>
-          <li>知识积累不足，解决方案缺乏系统性管理</li>
-        </ul>
-        
-        <p><strong>用户画像:</strong></p>
-        <ul>
-          <li>主要用户：IT支持工程师（70%）- 需要快速诊断工具</li>
-          <li>次要用户：系统管理员（20%）- 需要问题趋势分析</li>
-          <li>终端用户：自助查询（10%）- 需要简单易用的界面</li>
-        </ul>
-        
-        <h3>功能规格说明</h3>
-        <p><strong>核心功能模块:</strong></p>
-        <ul>
-          <li>智能问题分类与诊断 - 基于NLP的问题自动分类</li>
-          <li>解决方案知识库 - 结构化的问题-解决方案映射</li>
-          <li>用户自助查询界面 - 直观的问题搜索和诊断流程</li>
-          <li>支持工单自动分配 - 基于问题复杂度的智能路由</li>
-          <li>问题解决效果跟踪 - 数据驱动的持续优化</li>
-        </ul>
-        
-        <h3>技术架构设计</h3>
-        <p><strong>技术栈:</strong></p>
-        <ul>
-          <li>前端：React + TypeScript + Ant Design</li>
-          <li>后端：Node.js + Express + MongoDB</li>
-          <li>AI引擎：自然语言处理 + 机器学习分类</li>
-          <li>部署：Docker + Kubernetes + AWS</li>
-        </ul>
-        
-        <h3>项目里程碑规划</h3>
-        <ul>
-          <li><strong>Phase 1 (4周):</strong> 需求调研与原型设计</li>
-          <li><strong>Phase 2 (8周):</strong> 核心功能开发</li>
-          <li><strong>Phase 3 (4周):</strong> 测试与优化</li>
-          <li><strong>Phase 4 (2周):</strong> 上线与培训</li>
-        </ul>
-        
-        <h3>项目成果</h3>
-        <p>通过系统性的产品规划和执行，成功交付了问题自查系统，实现了：</p>
-        <ul>
-          <li>支持工单量减少60%</li>
-          <li>问题解决效率提升3倍</li>
-          <li>用户满意度从70%提升到90%</li>
-          <li>支持团队工作效率提升40%</li>
-        </ul>
+
+        <div class="project-overview">
+          <h3>项目概述</h3>
+          <p>开发了一套完整的职业发展问题自查系统前端界面，提供直观的交互式用户体验，支持问题分类、智能引导、个性化建议等功能。采用现代化的前端技术栈，确保系统的响应性和用户体验。</p>
+        </div>
+
+        <div class="project-features">
+          <h3>核心功能</h3>
+          <ul>
+            <li><strong>交互式问题引导:</strong> 智能问答流程，根据用户选择提供个性化建议</li>
+            <li><strong>多模块支持:</strong> 职业规划、简历优化、面试准备三大核心模块</li>
+            <li><strong>实时内容渲染:</strong> 支持Markdown格式的富文本显示和格式化</li>
+            <li><strong>响应式设计:</strong> 适配桌面和移动设备，提供一致的用户体验</li>
+            <li><strong>数据可视化:</strong> 问题流程树状图展示和进度跟踪</li>
+            <li><strong>管理界面:</strong> 完整的内容管理系统，支持实时编辑和更新</li>
+          </ul>
+        </div>
+
+        <div class="project-technologies">
+          <h3>技术栈</h3>
+          <ul>
+            <li><strong>前端框架:</strong> 原生JavaScript (ES6+)</li>
+            <li><strong>样式:</strong> CSS3, 响应式设计, Flexbox/Grid布局</li>
+            <li><strong>数据库:</strong> Firebase Firestore (NoSQL)</li>
+            <li><strong>认证:</strong> Firebase Authentication</li>
+            <li><strong>部署:</strong> Firebase Hosting</li>
+            <li><strong>编辑器:</strong> Quill.js (富文本编辑)</li>
+            <li><strong>图标:</strong> Emoji图标系统</li>
+          </ul>
+        </div>
+      `
+    },
+    "troubleshooting-backend": {
+      title: "问题自查系统 - 管理端",
+      category: "Full Stack",
+      externalLink: "https://zy-strouble-shooting.web.app/admin/",
+      screenshots: [
+        "./assets/images/trouble%20shooting/b1.png",
+        "./assets/images/trouble%20shooting/b2.png",
+        "./assets/images/trouble%20shooting/b3.png",
+        "./assets/images/trouble%20shooting/b4.png",
+        "./assets/images/trouble%20shooting/b5.png",
+        "./assets/images/trouble%20shooting/b6.png"
+      ],
+      content: `
+        <div class="project-meta">
+          <p><strong>项目类型:</strong> 后端开发</p>
+          <p><strong>项目周期:</strong> 2025年7月20号-25号</p>
+          <p><strong>目标用户:</strong> 学生和职业发展指导者</p>
+          <p><strong>项目背景:</strong> 职业发展问题自查系统后端架构与数据管理</p>
+          <p><strong>部署地址:</strong> <a href="https://zy-strouble-shooting.web.app/admin/" target="_blank">https://zy-trouble-shooting.web.app/admin/</a></p>
+          <div class="login-credentials">
+            <p><strong>登录账户:</strong> <span class="credential">admin</span></p>
+            <p><strong>登录密码:</strong> <span class="credential">admin123</span></p>
+            <p class="login-note">请使用上述账户信息登录管理端系统</p>
+          </div>
+        </div>
+
+        <div class="project-overview">
+          <h3>项目概述</h3>
+          <p>构建了完整的职业发展问题自查系统后端架构，提供稳定的数据存储、实时同步、内容管理等功能。采用云原生架构，确保系统的高可用性和可扩展性。</p>
+        </div>
+
+        <div class="project-features">
+          <h3>核心功能</h3>
+          <ul>
+            <li><strong>数据管理:</strong> Firestore NoSQL数据库，支持复杂的数据结构存储</li>
+            <li><strong>实时同步:</strong> 实时数据更新和状态同步</li>
+            <li><strong>内容管理:</strong> 动态内容加载和更新系统</li>
+            <li><strong>用户认证:</strong> 安全的用户身份验证和授权</li>
+            <li><strong>API设计:</strong> RESTful API设计，支持CRUD操作</li>
+            <li><strong>数据安全:</strong> 完整的权限控制和数据验证规则</li>
+            <li><strong>备份恢复:</strong> 自动数据备份和恢复机制</li>
+          </ul>
+        </div>
+
+        <div class="project-technologies">
+          <h3>技术栈</h3>
+          <ul>
+            <li><strong>数据库:</strong> Firebase Firestore</li>
+            <li><strong>认证:</strong> Firebase Authentication</li>
+            <li><strong>存储:</strong> Firebase Storage</li>
+            <li><strong>部署:</strong> Firebase Hosting</li>
+            <li><strong>监控:</strong> Firebase Analytics</li>
+            <li><strong>安全:</strong> Firestore Security Rules</li>
+            <li><strong>API:</strong> Firebase Admin SDK</li>
+          </ul>
+        </div>
+
+        <div class="project-architecture">
+          <h3>系统架构图</h3>
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: monospace; font-size: 14px; line-height: 1.6;">
+            <div style="text-align: center; margin-bottom: 20px;">
+              <div style="display: inline-block; background: #e3f2fd; padding: 10px 20px; border-radius: 5px; margin: 5px;">
+                <strong>前端界面层</strong><br>
+                • 主应用界面<br>
+                • 问题引导流程<br>
+                • 响应式设计<br>
+                • 富文本渲染
+              </div>
+              <div style="display: inline-block; background: #f3e5f5; padding: 10px 20px; border-radius: 5px; margin: 5px;">
+                <strong>管理界面层</strong><br>
+                • 内容管理<br>
+                • 树状编辑器<br>
+                • 数据可视化<br>
+                • 批量操作
+              </div>
+              <div style="display: inline-block; background: #e8f5e8; padding: 10px 20px; border-radius: 5px; margin: 5px;">
+                <strong>数据存储层</strong><br>
+                • Firestore<br>
+                • 实时同步<br>
+                • 安全规则<br>
+                • 备份恢复
+              </div>
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+              <div style="background: #fff3e0; padding: 15px; border-radius: 8px; display: inline-block;">
+                <strong>Firebase 云服务层</strong><br>
+                • 认证服务<br>
+                • 数据库服务<br>
+                • 存储服务<br>
+                • 托管服务
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-deployment">
+          <h3>部署信息</h3>
+          <ul>
+            <li><strong>生产环境:</strong> <a href="https://zy-trouble-shooting.web.app" target="_blank">https://zy-trouble-shooting.web.app</a></li>
+            <li><strong>管理面板:</strong> <a href="https://zy-trouble-shooting.web.app/admin/" target="_blank">https://zy-trouble-shooting.web.app/admin/</a></li>
+            <li><strong>树状编辑器:</strong> <a href="https://zy-trouble-shooting.web.app/admin/tree-editor.html" target="_blank">https://zy-trouble-shooting.web.app/admin/tree-editor.html</a></li>
+            <li><strong>Firebase控制台:</strong> <a href="https://console.firebase.google.com/project/zy-trouble-shooting/overview" target="_blank">https://console.firebase.google.com/project/zy-trouble-shooting/overview</a></li>
+          </ul>
+          <p>这个系统为职业发展指导提供了一个完整的解决方案，从前端用户体验到后端数据管理，都采用了现代化的技术栈和最佳实践。</p>
+        </div>
+      `
+    },
+    "career-platform": {
+      title: "CareerNavigator AI —— 专家驱动的AI就业赋能平台",
+      category: "AI Projects",
+      featured: true,
+      screenshots: [
+        "./assets/images/Career/career1.png",
+        "./assets/images/Career/career2.png",
+        "./assets/images/Career/career3.png",
+        "./assets/images/Career/career4.png",
+        "./assets/images/Career/career5.png",
+        "./assets/images/Career/career6.png",
+        "./assets/images/Career/career7.png",
+        "./assets/images/Career/career8.png"
+      ],
+      content: `
+        <div class="project-meta">
+          <p><strong>项目类型:</strong> AI产品设计与开发</p>
+          <p><strong>项目周期:</strong> 2025年7月至今</p>
+          <p><strong>目标用户:</strong> 英国高等教育机构、国际学生、职业顾问</p>
+          <p><strong>项目背景:</strong> 解决英国高等教育就业服务核心痛点的AI赋能平台</p>
+        </div>
+
+        <div class="project-overview">
+          <h3>项目概述</h3>
+          <p>CareerNavigator AI 是一款我独立构思并主导开发的专家驱动AI就业赋能平台，专为解决英国高等教育就业服务核心痛点而设计。通过前沿的AI技术解放顾问的战略价值，为每一位学生提供极致个性化的职业发展指导。</p>
+        </div>
+
+        <div class="project-challenges">
+          <h3>项目背景与挑战</h3>
+          <p>在英国，大学毕业生的就业成果是衡量学校声誉和吸引全球人才的关键指标。然而，大学的就业服务中心正面临双重困境：</p>
+          <ul>
+            <li><strong>对于大学（购买方）：</strong> 存在严重的战略资源错配。高薪聘请的专业职业顾问，其宝贵时间却被大量重复性的低价值任务（如修改简历格式、回答常见问题）所占据，无法专注于建立雇主关系等更高价值的战略性工作。</li>
+            <li><strong>对于学生（用户）：</strong> 学生们（尤其是国际学生）被海量通用信息淹没，难以获得及时、个性化的指导。他们在求职的关键环节，如面试准备和应对复杂的签证政策上，往往孤立无援。</li>
+          </ul>
+        </div>
+
+        <div class="project-solution">
+          <h3>我的解决方案：CareerNavigator AI</h3>
+          <p>CareerNavigator AI 并非要取代人类顾问，而是作为一个强大的"增强器 (Augmenter)"，通过自动化低价值任务，将顾问和学生从繁琐的事务中解放出来，专注于战略成长与高价值互动。</p>
+          
+          <h4>四大核心价值主张：</h4>
+          <ul>
+            <li><strong>"战略赋能者"：</strong> 通过AI自动处理超过90%的基础咨询任务，将职业顾问从行政工作中解放出来，让他们成为真正的"机会创造者"。</li>
+            <li><strong>"AI成长规划师"：</strong> 为每位学生动态生成从入学到毕业的个性化成长路径图，精准推荐实习、项目和技能课程，实现"千人千面"的职业指导。</li>
+            <li><strong>"AI求职教练"：</strong> 提供覆盖求职全流程的AI支持，包括通过智能对话挖掘亮点并生成定制化文书，以及基于目标公司和职位的超高拟真度面试模拟。</li>
+            <li><strong>"数据主权与品牌管家"：</strong> 提供本地化部署 (On-Premise) 选项，确保学生数据100%由校方掌控，彻底解决数据安全顾虑。平台完全白牌化，无缝融入大学自有品牌生态。</li>
+          </ul>
+        </div>
+
+        <div class="project-innovation">
+          <h3>核心技术创新：自主研发的"检索增强生成 (RAG)"引擎</h3>
+          <p>本项目的技术壁垒并非简单调用通用AI模型，而是我自主设计和优化的专家驱动的"检索增强生成 (Retrieval-Augmented Generation, RAG)"框架。</p>
+          
+          <p>与公版AI（如ChatGPT）容易产生事实性错误（"幻觉"）不同，我们的RAG引擎工作原理如下：</p>
+          <ul>
+            <li><strong>精准检索 (Retrieve)：</strong> 当接收到用户请求时，系统首先会从我们构建的、持续更新的私有权威知识库（包含英国官方签证法规、实时劳动力市场数据、雇主担保名单等）中，检索出最相关、可验证的事实信息。</li>
+            <li><strong>增强生成 (Augment & Generate)：</strong> 随后，AI模型会基于这些被核实过的"事实原材料"来组织语言并生成个性化、精准、可信的建议。</li>
+          </ul>
+          
+          <p>这个"先检索、后生成"的机制，从根本上杜绝了AI"胡说八道"的可能性，确保了在职业指导这一高风险场景下的绝对可靠性。我们真正的护城河，是这个高质量、结构化的知识库以及高效的检索算法。</p>
+        </div>
+
+        <div class="project-role">
+          <h3>我的角色与贡献</h3>
+          <p>作为该项目的创始人与核心开发者，我全面负责从0到1的整个过程：</p>
+          <ul>
+            <li><strong>项目构思与验证：</strong> 基于在英国顶尖大学就业中心实习的亲身经历，敏锐洞察到市场痛点，并主导了早期的市场调研与需求验证。</li>
+            <li><strong>AI架构设计：</strong> 独立设计了项目的核心技术——专家驱动的RAG引擎，并规划了从MVP到可扩展平台的完整技术路线图。</li>
+            <li><strong>产品与开发：</strong> 负责平台的全栈开发与实施，包括AI模型集成、数据库管理和API设计，并主导了多次用户反馈驱动的产品迭代优化。</li>
+            <li><strong>商业规划：</strong> 撰写了完整的商业计划书，制定了市场、销售、资源、财务及风险管理等全方位战略。</li>
+          </ul>
+        </div>
+
+        <div class="project-technologies">
+          <h3>技术栈</h3>
+          <ul>
+            <li><strong>AI技术：</strong> 自研RAG引擎、GPT-4o、向量数据库、知识图谱</li>
+            <li><strong>后端技术：</strong> Python, FastAPI, PostgreSQL, Redis</li>
+            <li><strong>前端技术：</strong> React, TypeScript, Tailwind CSS</li>
+            <li><strong>部署：</strong> Docker, Kubernetes, AWS/Azure</li>
+            <li><strong>数据安全：</strong> GDPR合规、端到端加密、本地化部署</li>
+            <li><strong>监控分析：</strong> Prometheus, Grafana, ELK Stack</li>
+          </ul>
+        </div>
+
+        <div class="project-vision">
+          <h3>项目愿景</h3>
+          <p>我坚信，CareerNavigator AI 将为英国乃至全球的教育机构带来一场就业服务领域的变革。它将重塑职业顾问的角色，使他们回归战略核心；同时，它将赋予每一位学生自信与确定性，让他们拥有一个全天候、永远可靠的AI职业导师，从而在未来的职业道路上取得成功。</p>
+        </div>
       `
     }
   };
@@ -642,6 +881,10 @@ document.addEventListener("DOMContentLoaded", function() {
     screenshotsContainer.style.display = "block";
     totalSlides = screenshots.length;
     currentSlide = 0;
+    
+    // Debug: Check if container is visible
+    console.log("Screenshots container display:", screenshotsContainer.style.display);
+    console.log("Screenshots container computed style:", window.getComputedStyle(screenshotsContainer).display);
 
     // Clear existing content
     slidesContainer.innerHTML = "";
@@ -655,10 +898,11 @@ document.addEventListener("DOMContentLoaded", function() {
       slide.style.backgroundSize = "contain";
       slide.style.backgroundPosition = "center";
       slide.style.backgroundRepeat = "no-repeat";
-      slide.style.backgroundColor = "var(--jet)";
+      slide.style.backgroundColor = "transparent";
       
       // Add debug info
       console.log(`Creating slide ${index + 1} with image: ${screenshot}`);
+      console.log(`Slide background image set to: ${slide.style.backgroundImage}`);
       
       slidesContainer.appendChild(slide);
 
@@ -668,6 +912,18 @@ document.addEventListener("DOMContentLoaded", function() {
       if (index === 0) dot.classList.add("active");
       dot.addEventListener("click", () => goToSlide(index));
       dotsContainer.appendChild(dot);
+    });
+    
+    // Debug: Check slides after creation
+    console.log("Total slides created:", slidesContainer.children.length);
+    console.log("First slide background image:", slidesContainer.children[0]?.style.backgroundImage);
+    
+    // Test image loading
+    screenshots.forEach((screenshot, index) => {
+      const img = new Image();
+      img.onload = () => console.log(`Image ${index + 1} loaded successfully: ${screenshot}`);
+      img.onerror = () => console.error(`Failed to load image ${index + 1}: ${screenshot}`);
+      img.src = screenshot;
     });
 
     // Event listeners are handled by the unified event delegation above
@@ -710,6 +966,13 @@ document.addEventListener("DOMContentLoaded", function() {
       // Show modal first
       projectModal.classList.add("active");
       document.body.style.overflow = "hidden";
+      
+      // Add featured class for special styling
+      if (project.featured) {
+        projectModal.classList.add("featured-modal");
+      } else {
+        projectModal.classList.remove("featured-modal");
+      }
 
       // Show/hide floating external link button
       const floatingLink = document.getElementById("floating-external-link");
@@ -732,18 +995,28 @@ document.addEventListener("DOMContentLoaded", function() {
         ${project.content}
       `;
 
-      // Find existing content area and replace it
-      const existingContent = modalBody.querySelector(".project-content");
-      if (existingContent) {
-        existingContent.replaceWith(contentContainer);
-      } else {
-        // If no existing content, append to modal body
-        modalBody.appendChild(contentContainer);
+      // Add content to the dedicated text content container
+      const textContentContainer = document.getElementById("project-text-content");
+      if (textContentContainer) {
+        textContentContainer.innerHTML = "";
+        textContentContainer.appendChild(contentContainer);
       }
 
       // Initialize screenshots carousel after modal is shown
       setTimeout(() => {
         initScreenshotCarousel(project.screenshots);
+        
+        // Special handling for featured projects
+        if (project.featured) {
+          setTimeout(() => {
+            const slides = document.querySelectorAll('.featured-modal .screenshot-slide');
+            slides.forEach(slide => {
+              slide.style.backgroundColor = "transparent";
+              slide.style.filter = "none";
+              slide.style.opacity = "1";
+            });
+          }, 200);
+        }
       }, 100);
     }
   }
